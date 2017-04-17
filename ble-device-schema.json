@@ -1,0 +1,71 @@
+{
+    "title": "BleDevice",
+    "description": "BLE设备的定义，同时适用于主设备和从设备，相当于他们之间的约定",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "string",
+            "description": "版本号，日期的形式，格式是yyyy-mm-dd，此版本为2017-04-17"
+        },
+        "advertisement": {
+            "type":"object",
+            "description": "广播信息",
+            "properties": {
+                "name": {
+                    "type":"string",
+                    "description":"广播名称"
+                },
+                "service": {
+                    "type":"string",
+                    "description":"广播的服务UUID"
+                },
+                "nameFilterPattern": {
+                    "type":"string",
+                    "description":"广播名称的正则表达式，主设备在搜索从设备根据此表达式匹配设备名称，从而确定设备类型"
+                }
+            }
+        },
+        "services": {
+            "type": "array",
+            "description":"需要提供/发现的服务",
+            "items": {
+                "title":"ble service",
+                "properties": {
+                    "uuid": {
+                        "type":"string",
+                        "description":"服务UUID"
+                    },
+                    "name": {
+                        "type":"string",
+                        "description":"服务名称，仅描述用，代码不处理"
+                    },
+                    "characteristics": {
+                        "type":"array",
+                        "items": {
+                            "title":"ble characteristic",
+                            "properties": {
+                                "uuid": {
+                                    "type":"string",
+                                    "description":"特征的UUID"
+                                },
+                                "name": {
+                                    "type":"string",
+                                    "description":"特征的名称，主设备SDK中的数据点"
+                                },
+                                "properties": {
+                                    "type":"array",
+                                    "description":"特征的属性（支持的操作）",
+                                    "items": {
+                                        "title":"ble characteristic property",
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required":["version","advertisement","services"]
+}
