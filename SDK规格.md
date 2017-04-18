@@ -60,7 +60,7 @@
     * curDevice
       * 在同一时刻只连接一个设备的应用中设置和获取当前设备，BleDevice或其子类
   * 方法：
-    * addDeviceFilter
+    * addSearchFilter
       * 添加设备定义，在搜索时只搜索指定类型的设备，可以多次调用以支持多个设备类型，若从未调用过则搜索所有设备
       * 参数：JSON文档的内容，类型可以是JSON对象或字典
     * setSearchTimeout
@@ -95,7 +95,7 @@
 
 * BleDevice
   
-  包装蓝牙设备对象
+  包装蓝牙设备对象
 
   * 构造函数
     * 参数：系统原生的蓝牙设备，设备定义
