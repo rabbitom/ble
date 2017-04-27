@@ -91,6 +91,7 @@
       * 参数：错误ID（整数），错误信息（字符串）
     * onAdvertisementUpdated
       * 当设备的广播信息有更新时调用
+      * 参数：设备ID，广播信息（字典）
     * onRSSIUpdated
       * 当设备的RSSI值更新时调用，用于在搜索过程中更新设备信号强度
       * 参数：设备ID，RSSI
