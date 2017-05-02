@@ -17,7 +17,7 @@
 ### 使用方法及原理：
 
 #### 1.编写JSON文档
-使用JSON文档描述相应BLE设备（[JSON文档规格看这里](https://github.com/rabbitom/ble/blob/master/ble-device-schema.json)，至于JSON文档的存放位置该库并没有限制，你可以在assets目录下，也可以网络获取。该库只需传入一个用于描述相应BLE设备的JSONObject对象即可。
+使用JSON文档描述相应BLE设备（[JSON文档规格看这里](https://github.com/rabbitom/ble/blob/master/ble-device-schema.json))，至于JSON文档的存放位置该库并没有限制，你可以在assets目录下，也可以网络获取。该库只需传入一个用于描述相应BLE设备的JSONObject对象即可。
 
 
 #### 2.扫描设备
