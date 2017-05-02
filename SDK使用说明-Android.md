@@ -1,19 +1,26 @@
-#ble-Android库使用文档
-##简介
+
+# ble-Android库使用文档
+
+## 简介
 该库主要是对Android BLE API的一个封装，方便开发人员轻松接入BLE功能
 
-###特性：
-1.不依赖第三方库
-2.使用Android本地广播传递消息
-3.使用JSON文档描述BLE设备
-4.内部处理手机蓝牙开关与权限问题
-###集成库：
+
+### 特性：
+1. 不依赖第三方库
+1. 使用Android本地广播传递消息
+1. 使用JSON文档描述BLE设备
+1. 内部处理手机蓝牙开关与权限问题
+
+### 集成库：
 	//TODO:
-###使用方法及原理：
-####1.编写JSON文档
+
+### 使用方法及原理：
+
+#### 1.编写JSON文档
 使用JSON文档描述相应BLE设备（[JSON文档规格看这里](https://github.com/rabbitom/ble/blob/master/ble-device-schema.json)，至于JSON文档的存放位置该库并没有限制，你可以在assets目录下，也可以网络获取。该库只需传入一个用于描述相应BLE设备的JSONObject对象即可。
 
-####2.扫描设备
+
+#### 2.扫描设备
 设备扫描主要会使用到该库的以下2个类：
 **BleDevicesManager:** 
 该类使用单例模式实现。此类用以实现BLE设备的搜索，添加过滤条件，BleDevice类（或者子类）对象的创建。
@@ -86,7 +93,8 @@ class MySearchReceiver extends BleSearchReceiver{
 
 ```
 
-####3.连接设备
+
+#### 3.连接设备
 设备连接主要也会使用到2个类：
 **BleDevice:**
 该类主要是对Android原生BluetoothDevice类以及其相应操作的一个封装。使用此对象可方便的实现BLE设备的连接，断开连接，特征读写，通知开关等操作。
@@ -166,7 +174,8 @@ class MyDeviceStateReceiver extends DeviceStateReceiver {
    }  
 
 ```
-####4.数据读写与通知开关
+
+#### 4.数据读写与通知开关
 使用该库可以很方便的对BLE设备进行数据读写与开关通知。所有这些操作都是通过JSON文档内的节点名来调用的。
 
 **写入数据：**
