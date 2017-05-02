@@ -12,7 +12,33 @@
 1. 内部处理手机蓝牙开关与权限问题
 
 ### 集成库：
-	//TODO:
+
+**方式1：使用gradle**
+
+Step1.在项目根build.gradle文件中配置如下
+
+```
+allprojects {
+ 
+	repositories {
+	...
+	maven { url 'https://jitpack.io' }
+	}
+}
+```
+Step2.添加依赖：
+
+```
+dependencies {
+	
+	compile 'com.github.rabbitom:ble-app-android:0.1'
+}
+```
+
+**方式2：克隆该库源码然后导入自己项目中**
+
+具体导入方式可以看[官方文档](https://developer.android.com/studio/projects/android-library.html?hl=zh-cn)
+
 
 ### 使用方法及原理：
 
