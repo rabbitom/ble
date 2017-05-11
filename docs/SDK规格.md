@@ -1,12 +1,12 @@
 ## 说明
 
-* 命名空间或包名：net.erabbit
+* 命名空间或包名：net.erabbit.ble
 * 此SDK只考虑应用实现主设备角色的情况
 * 此SDK的目标之一是为各平台的实现定义统一的接口，方便多平台及跨平台开发，在某一具体平台上，按照SDK的规定实现可能显繁琐或性能受影响，这可以接受
 
 ## 设备定义
 
-以JSON文档描述蓝牙设备的广播信息、服务与特征，并将特征映射为数据点，规范详见：[BleDevice Schema](ble-device-schema.json)，示例：  
+以JSON文档描述蓝牙设备的广播信息、服务与特征，并将特征映射为数据点，规范详见：[BleDevice Schema](ble-device-schema.json)，示例文件[NordicSerial.json](NordicSerial.json)：  
 ```
 {
     "version": "2017-04-17",

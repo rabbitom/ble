@@ -1,0 +1,30 @@
+{
+    "version": "2017-04-17",
+    "advertisement": {
+        "name": "NordicSerial",
+        "service": "6e400001b5a3f393e0a9e50e24dcca9e",
+        "nameFilterPattern": ".+"
+    },
+    "services": [
+        {
+            "uuid": "6e400001b5a3f393e0a9e50e24dcca9e",
+            "name": "main",
+            "characteristics": [
+                {
+                    "uuid": "6e400002b5a3f393e0a9e50e24dcca9e",
+                    "name": "send",
+                    "properties": [
+                        "write"
+                    ]
+                },
+                {
+                    "uuid": "6e400003b5a3f393e0a9e50e24dcca9e",
+                    "name": "receive",
+                    "properties": [
+                        "notify"
+                    ]
+                }
+            ]
+        }
+    ]
+}
