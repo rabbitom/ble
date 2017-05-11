@@ -1,21 +1,21 @@
-var Characteristic = require('bleno').Characteristic;
+var mock = require('./mock.js');
+var device = require('./nordicserial.json');
 
 var currentStatus = Buffer.from([0xa0, 0x10, 0, 0]);
 var currentStatusUpdateHandle;
 
-function SimpleEchoDevice()
-{
-	this.config = {
+var handler = {
+	send: {
 		onWrite: (data,offset,withoutResponse,callback)=>{
 			console.log(`ble received config at offset ${offset}: `, data);
 			if(data.length == currentStatus.length) {
 				data.copy(currentStatus);
 			}
 			if(!withoutResponse)
-				callback(Characteristic.RESULT_SUCCESS);
+				callback(mock.DONE);
 		}
-	};
-	this.data = {
+	},
+	receive: {
 		onSubscribe: (maxValueSize,updateValueCallback)=>{
 			console.log(`ble subscribed data, maxValueSize = ${maxValueSize}`);
 			currentStatusUpdateHandle = setInterval((callback)=>{
@@ -28,6 +28,9 @@ function SimpleEchoDevice()
 			clearInterval(currentStatusUpdateHandle);
 		}
 	}
-}
+};
 
-module.exports = SimpleEchoDevice;
+mock.start(device, handler).catch((error)=>{
+	console.error(error);
+	process.exit(1);
+});

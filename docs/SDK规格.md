@@ -45,7 +45,7 @@
 ```
 cd scripts
 npm install
-npm run export
+npm run export nordicserial.json
 ```
 
 > 服务UUID：6e400001b5a3f393e0a9e50e24dcca9e

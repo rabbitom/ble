@@ -6,7 +6,7 @@
     "bleno": "latest"
   },
   "scripts": {
-    "mock": "node mock.js",
+    "nordicserail": "node nordicserial.js",
     "export": "node export_md.js"
   }
 }
