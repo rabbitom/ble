@@ -52,10 +52,6 @@
                                     "type":"string",
                                     "description":"特征的名称，主设备SDK中的数据点"
                                 },
-                                "description": {
-                                    "type":"string",
-                                    "description":"特征的描述文本，用于说明特征的作用、数据格式等"
-                                },
                                 "properties": {
                                     "type":"array",
                                     "description":"特征的属性（支持的操作）",
