@@ -16,8 +16,8 @@
 
 ## 文档
 
-[SDK规格](docs\SDK规格.md)说明了SDK设计的通用规范，包括设计模式、类名、属性和方法、回调函数及参数，各平台上的SDK在设计时都遵循此规格。
+[SDK规格](docs/SDK规格.md)说明了SDK设计的通用规范，包括设计模式、类名、属性和方法、回调函数及参数，各平台上的SDK在设计时都遵循此规格。
 
 以下是各平台的SDK使用说明：
 
-* [Android](docs\SDK使用说明-Android.md)
+* [Android](docs/SDK使用说明-Android.md)
