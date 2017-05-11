@@ -23,6 +23,7 @@
                 {
                     "uuid": "6e400002b5a3f393e0a9e50e24dcca9e",
                     "name": "send",
+                    "description": "主机发送数据",
                     "properties": [
                         "write"
                     ]
@@ -30,6 +31,7 @@
                 {
                     "uuid": "6e400003b5a3f393e0a9e50e24dcca9e",
                     "name": "receive",
+                    "description": "主机接收数据",
                     "properties": [
                         "notify"
                     ]
@@ -39,6 +41,21 @@
     ]
 }
 ```
+可以使用本项目提供的脚本将以上json文档中的服务和特征转换成markdown文档：
+```
+cd scripts
+npm install
+npm run export
+```
+
+> 服务UUID：6e400001b5a3f393e0a9e50e24dcca9e
+> 
+> 特征：
+> 
+> 名称|UUID|属性|说明
+> -|-|-|-
+> send|6e400002b5a3f393e0a9e50e24dcca9e|写|主机发送数据
+> receive|6e400003b5a3f393e0a9e50e24dcca9e|通知|主机接收数据
 
 ## 实现思路
 

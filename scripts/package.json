@@ -1,0 +1,12 @@
+{
+  "name": "ble-sdk-scripts",
+  "version": "0.0.0",
+  "description": "mock ble peripheral on computer; export device define to markdown document",
+  "dependencies": {
+    "bleno": "latest"
+  },
+  "scripts": {
+    "mock": "node mock.js",
+    "export": "node export_md.js"
+  }
+}
