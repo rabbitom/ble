@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "description": "mock ble peripheral on computer; export device define to markdown document",
   "dependencies": {
-    "ble-sdk": "github:rabbitom/ble-js"
+    "ble-sdk": "0.0.0"
   },
   "scripts": {
-    "nordicserail": "node nordicserial.js",
+    "nordicserial": "node nordicserial.js",
     "export": "node node_modules/ble-sdk/export.js"
   }
 }
