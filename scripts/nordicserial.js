@@ -1,4 +1,4 @@
-var mock = require('./mock.js');
+var ble = require('ble-sdk');
 var device = require('./nordicserial.json');
 
 var currentStatus = Buffer.from([0xa0, 0x10, 0, 0]);
@@ -30,7 +30,7 @@ var handler = {
 	}
 };
 
-mock.start(device, handler).catch((error)=>{
+ble.mock(device, handler).catch((error)=>{
 	console.error(error);
 	process.exit(1);
 });
