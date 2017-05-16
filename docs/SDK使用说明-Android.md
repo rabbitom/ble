@@ -37,7 +37,7 @@ dependencies {
 
 **方式2：克隆该库源码然后导入自己项目中**
 
-具体导入方式可以看[官方文档](https://developer.android.com/studio/projects/android-library.html?hl=zh-cn)
+具体步骤参考[Android开发者文档](https://developer.android.google.cn/studio/projects/android-library.html?hl=zh-cn#AddDependency)
 
 
 ### 使用方法及原理：
