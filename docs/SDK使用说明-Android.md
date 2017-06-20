@@ -16,22 +16,25 @@
 
 这里介绍两种在APP工程中引入本SDK的方法，一种是通过Gradle库，比较简单，但看不到源代码；另一种是直接将SDK的源代码作为一个模块加入工程。
 
-**方法1：使用Gradle库**
+**方法1：使用Gradle库**
 
-打开项目根目录下的build.gradle，添加以下内容：
+打开项目根目录下的build.gradle，添加以下内容：
 
 ```
 allprojects {
 
     repositories {
-    ...
-    maven { url 'https://jitpack.io' }
+       ...
+       maven { url 'https://jitpack.io' }
     }
 }
+```
 
+打开APP的build.gradle，添加以下内容：
+```
 dependencies {
     ...
-    compile 'com.github.rabbitom:ble-app-android:0.1'
+    compile 'com.github.rabbitom:ble-app-android:0.1.2'
 }
 ```
 
@@ -56,16 +59,16 @@ dependencies {
 参考：[Android开发者文档 - 以依赖项形式添加您的库](https://developer.android.google.cn/studio/projects/android-library.html?hl=zh-cn#AddDependency)
 
 ### 准备JSON文档
-需要编写JSON文档描述BLE设备的广播、服务和特征，格式请参考[BLE-SDK规格](https://github.com/rabbitom/ble/blob/master/ble-device-schema.json)。JSON文件可以从assets目录加载，也可以从网络获取，要将其解析为JSONObject对象。
+需要编写JSON文档描述BLE设备的广播、服务和特征，格式请参考[BLE-SDK规格](https://github.com/rabbitom/ble/blob/master/ble-device-schema.json)。JSON文件可以从assets目录加载，也可以从网络获取，要将其解析为JSONObject对象。
 
-### 初始化BleDevicesManager
+### 初始化BleDevicesManager
 
 BleDevicesManager使用单例模式，用以实现搜索BLE设备，以及创建和管理设备对象。  
-在搜索设备的Activity中声明BleDevicesManager对象：  
+在搜索设备的Activity中声明BleDevicesManager对象：  
 ```
 BleDevicesManager bleDevicesManager;
 ```
-在OnCreate函数中获取实例，并添加准备好的JSONObject作为搜索过滤条件：
+在OnCreate函数中获取实例，并添加准备好的JSONObject作为搜索过滤条件：
 ```
 bleDevicesManager = BleDevicesManager.getInstance(this);
 
@@ -77,7 +80,7 @@ try {
     e.printStackTrace();
 }
 ```
-其中addSearchFilter方法的参数device代表设备定义，此方法可多次调用，每次传不同的设备定义，以支持搜索多种设备。
+其中addSearchFilter方法的参数device代表设备定义，此方法可多次调用，每次传不同的设备定义，以支持搜索多种设备。
 
 ### 搜索设备
 （可选）设置搜索超时时间，默认10s，此处改成了5秒：
@@ -141,7 +144,7 @@ class MySearchReceiver extends BleSearchReceiver{
         super.onAdvertisementUpdated(deviceID, data);
     }
 
-    //设备的信号强度变化，可用于实时更新设备列表或估算设备距离
+    //设备的信号强度变化，可用于实时更新设备列表或估算设备距离
     @Override
     public void onRSSIUpdated(String deviceID, int rssi) {
         super.onRSSIUpdated(deviceID, rssi);
@@ -151,13 +154,13 @@ class MySearchReceiver extends BleSearchReceiver{
 ```
 
 ### 创建设备对象
-SDK使用BleDevice包装Android原生的BluetoothDevice类，以实现BLE设备的连接管理和数据收发。BluetoothDevice对象是BleDevice对象的成员，为了防止针对同一个BluetoothDevice对象创建多个包装对象（这样会导致系统回调重复执行），应用应当使用BleDevicesManager来创建和管理设备对象：
+SDK使用BleDevice包装Android原生的BluetoothDevice类，以实现BLE设备的连接管理和数据收发。BluetoothDevice对象是BleDevice对象的成员，为了防止针对同一个BluetoothDevice对象创建多个包装对象（这样会导致系统回调重复执行），应用应当使用BleDevicesManager来创建和管理设备对象：
 ```
 BleDevice bleDevice = bleDevicesManager.findDevice(deviceID);
 if (bleDevice == null)
     bleDevice = bleDevicesManager.createDevice(deviceID, this, BleDevice.class, deviceJson);
 ```
-即先查找bleDevicesManager内是否已存在deviceID对应的BleDevice对象，若有就复用，没有就创建。使用createDevice方法创建的对象都会保存在BleDevicesManager实例的内部数组中。
+即先查找bleDevicesManager内是否已存在deviceID对应的BleDevice对象，若有就复用，没有就创建。使用createDevice方法创建的对象都会保存在BleDevicesManager实例的内部数组中。
 
 ### 连接设备
 
@@ -165,7 +168,7 @@ if (bleDevice == null)
 ```
 bleDevice.connect();
 ```
-连接的结果通过应用内广播接收，同样需要实现接收器并注册：
+连接的结果通过应用内广播接收，同样需要实现接收器并注册：
 ```
 LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
 
@@ -177,7 +180,7 @@ myDeviceStateReceiver.registerReceiver(lbm);
 ```
 class MyDeviceStateReceiver extends DeviceStateReceiver {
 
-    //蓝牙连接成功，此时还不能开始收发数据，SDK还需要发现服务和特征并与设备定义比对
+    //蓝牙连接成功，此时还不能开始收发数据，SDK还需要发现服务和特征并与设备定义比对
     @Override
     public void onDeviceConnected(String deviceID) {
         super.onDeviceConnected(deviceID);
@@ -195,7 +198,7 @@ class MyDeviceStateReceiver extends DeviceStateReceiver {
         super.onDeviceMismatch(deviceID);
     }
 
-    //设备已准备好，设备定义中描述的服务和特征均已发现
+    //设备已准备好，设备定义中描述的服务和特征均已发现
     @Override
     public void onDeviceReady(String deviceID){
            super.onDeviceReady(deviceID);
@@ -225,14 +228,14 @@ bleDevice.readData("battery");
 ```
 class MyDeviceStateReceiver extends DeviceStateReceiver {
 
-    //收到了来自设备的数据
+    //收到了来自设备的数据
     @Override
     public void onDeviceReceivedData(String deviceID, String name, byte[] data) {
         super.onDeviceReceivedData(deviceID, name, data);
     }
 }
 ```
-在BleDevice类里有一个与上面这个函数同名的方法，用于发送广播，应用可以继承BleDevice类，重写此方法，在设备类内部解析数据：
+在BleDevice类里有一个与上面这个函数同名的方法，用于发送广播，应用可以继承BleDevice类，重写此方法，在设备类内部解析数据：
 ```
 class MyDevice extends BleDevice {
 
@@ -248,7 +251,7 @@ class MyDevice extends BleDevice {
     }
 }
 ```
-注意重写的方法中并没有调用super的同名实现（onDeviceReceivedData），而是在解析字节数组之后调用了onDeviceValueChanged方法，此方法的第二个参数（VALUE_OF_TEMPERATURE）是一个自定义的整数，表示值的类型，而第三个参数可以是实现了Serializable接口的任何类型，在DeviceStateReceiver中使用同名函数接收广播：
+注意重写的方法中并没有调用super的同名实现（onDeviceReceivedData），而是在解析字节数组之后调用了onDeviceValueChanged方法，此方法的第二个参数（VALUE_OF_TEMPERATURE）是一个自定义的整数，表示值的类型，而第三个参数可以是实现了Serializable接口的任何类型，在DeviceStateReceiver中使用同名函数接收广播：
 ```
 class MyDeviceStateReceiver extends DeviceStateReceiver {
 
