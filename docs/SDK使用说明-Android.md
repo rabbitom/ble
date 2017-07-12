@@ -87,7 +87,7 @@ try {
 ```
 bleDevicesManager.setSearchTimeout(5*1000);
 ```
-开始搜索，参数是Acticity，用于弹出开启蓝牙、请求权限的对话框：
+开始搜索，参数是Activity，用于弹出开启蓝牙、请求权限的对话框：
 ```
 bleDevicesManager.startSearch(this);
 ```
